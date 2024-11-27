@@ -7,6 +7,7 @@ import { ErrorCodes } from "../exceptions/root";
 import { SignupSchema } from "../schema/user";
 import { JWT_SECRET } from "../secret";
 import { NotFoundException } from "../exceptions/not-found";
+import { UnAuthorizedAccessException } from "../exceptions/unauthorized";
 
 export const signup = async (
   req: Request,
@@ -64,5 +65,7 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const me = async (req: Request, res: Response) => {
-  res.json(req.user);
+  if (req.user) {
+    res.json(req.user);
+  }
 };
