@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { ProductSchema } from "../services/validation";
-import { BadRequestException } from "../exceptions/bad-request";
-import { ErrorCodes } from "../exceptions/root";
-import prisma from "../../prisma/client";
+import { ProductSchema } from "../../services/validation";
+import { BadRequestException } from "../../exceptions/bad-request";
+import { ErrorCodes } from "../../exceptions/root";
+import prisma from "../../../prisma/client";
 import { fromError } from "zod-validation-error";
 
 export const createProduct = async (req: Request, res: Response) => {
