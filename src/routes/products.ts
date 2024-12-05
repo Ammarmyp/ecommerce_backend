@@ -6,6 +6,7 @@ import addminMiddleware from "../middlewares/admin";
 import { updateProduct } from "../controllers/product/update";
 import { deleteProduct } from "../controllers/product/delete";
 import { getProductById } from "../controllers/product/getById";
+import { getProducts } from "../controllers/product/getProducts";
 
 const productsRouter: Router = Router();
 
@@ -27,6 +28,7 @@ productsRouter.delete(
   errorHandler(deleteProduct)
 );
 
-productsRouter.get("/:id", getProductById);
+productsRouter.get("/:id", errorHandler(getProductById));
+productsRouter.get("/products", errorHandler(getProducts));
 
 export default productsRouter;
