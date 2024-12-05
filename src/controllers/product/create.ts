@@ -4,6 +4,7 @@ import { BadRequestException } from "../../exceptions/bad-request";
 import { ErrorCodes } from "../../exceptions/root";
 import prisma from "../../../prisma/client";
 import { fromError } from "zod-validation-error";
+import ApiResponse from "../../services/apiResponse";
 
 export const createProduct = async (req: Request, res: Response) => {
   const { success, error } = await ProductSchema.safeParseAsync(req.body);
@@ -23,5 +24,5 @@ export const createProduct = async (req: Request, res: Response) => {
     },
   });
 
-  res.status(201).json(product);
+  res.status(201).json(new ApiResponse(true, "Product is created", product));
 };

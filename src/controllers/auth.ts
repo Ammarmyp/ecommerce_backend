@@ -8,6 +8,7 @@ import { SignupSchema } from "../schema/user";
 import { JWT_SECRET } from "../secret";
 import { NotFoundException } from "../exceptions/not-found";
 import { UnAuthorizedAccessException } from "../exceptions/unauthorized";
+import ApiResponse from "../services/apiResponse";
 
 export const signup = async (
   req: Request,
@@ -35,7 +36,7 @@ export const signup = async (
     },
   });
 
-  res.json(user);
+  res.json(new ApiResponse(true, "User created", user));
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -61,7 +62,7 @@ export const login = async (req: Request, res: Response) => {
     JWT_SECRET
   );
 
-  res.json({ user, token });
+  res.json(new ApiResponse(true, "user logged in ", { user, token }));
 };
 
 export const me = async (req: Request, res: Response) => {

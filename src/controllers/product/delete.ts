@@ -5,6 +5,7 @@ import { BadRequestException } from "../../exceptions/bad-request";
 import { ErrorCodes } from "../../exceptions/root";
 import prisma from "../../../prisma/client";
 import { NotFoundException } from "../../exceptions/not-found";
+import ApiResponse from "../../services/apiResponse";
 
 export const deleteProduct = async (req: Request, res: Response) => {
   const { error } = await ProductSchema.safeParseAsync(req.body);
@@ -28,5 +29,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
     where: { id: parseInt(req.body.id, 10) },
   });
 
-  res.status(200).json(deletedProduct);
+  res
+    .status(200)
+    .json(new ApiResponse(true, "Item deleted properly", deletedProduct));
 };
