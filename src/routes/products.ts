@@ -15,13 +15,13 @@ productsRouter.post(
 );
 
 productsRouter.put(
-  "/",
+  "/edit/:id",
   [authMiddleware, addminMiddleware],
   errorHandler(updateProduct)
 );
 
 productsRouter.delete(
-  "/delete",
+  "/delete/:id",
   [authMiddleware, addminMiddleware],
   errorHandler(deleteProduct)
 );

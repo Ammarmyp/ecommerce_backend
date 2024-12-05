@@ -19,7 +19,7 @@ export const updateProduct = async (req: Request, res: Response) => {
   }
 
   const product = await prisma.product.findFirst({
-    where: { id: parseInt(req.body.id, 10) },
+    where: { id: parseInt(req.params.id, 10) },
   });
 
   if (!product) {
@@ -31,7 +31,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 
   const updatedProduct = await prisma.product.update({
     where: {
-      id: parseInt(req.body.id, 10),
+      id: parseInt(req.params.id, 10),
     },
     data: {
       name: data.name,
