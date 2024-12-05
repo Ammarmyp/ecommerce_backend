@@ -15,7 +15,7 @@ productsRouter.post(
 );
 
 productsRouter.put(
-  "/:id",
+  "/",
   [authMiddleware, addminMiddleware],
   errorHandler(updateProduct)
 );

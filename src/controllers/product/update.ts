@@ -5,6 +5,7 @@ import { BadRequestException } from "../../exceptions/bad-request";
 import { ErrorCodes } from "../../exceptions/root";
 import prisma from "../../../prisma/client";
 import { NotFoundException } from "../../exceptions/not-found";
+import ApiResponse from "../../services/apiResponse";
 
 export const updateProduct = async (req: Request, res: Response) => {
   const { error, data } = await ProductSchema.safeParseAsync(req.body);
@@ -18,7 +19,7 @@ export const updateProduct = async (req: Request, res: Response) => {
   }
 
   const product = await prisma.product.findFirst({
-    where: { id: parseInt(req.params.id, 10) },
+    where: { id: parseInt(req.body.id, 10) },
   });
 
   if (!product) {
@@ -30,7 +31,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 
   const updatedProduct = await prisma.product.update({
     where: {
-      id: parseInt(req.params.id, 10),
+      id: parseInt(req.body.id, 10),
     },
     data: {
       name: data.name,
@@ -40,5 +41,9 @@ export const updateProduct = async (req: Request, res: Response) => {
     },
   });
 
-  res.status(200).json(updatedProduct);
+  res
+    .status(200)
+    .json(
+      new ApiResponse(true, "product updated successfully", updatedProduct)
+    );
 };
