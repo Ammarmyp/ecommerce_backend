@@ -5,6 +5,7 @@ import authMiddleware from "../middlewares/auth";
 import addminMiddleware from "../middlewares/admin";
 import { updateProduct } from "../controllers/product/update";
 import { deleteProduct } from "../controllers/product/delete";
+import { getProductById } from "../controllers/product/getById";
 
 const productsRouter: Router = Router();
 
@@ -25,5 +26,7 @@ productsRouter.delete(
   [authMiddleware, addminMiddleware],
   errorHandler(deleteProduct)
 );
+
+productsRouter.get("/:id", getProductById);
 
 export default productsRouter;
