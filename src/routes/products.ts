@@ -29,6 +29,6 @@ productsRouter.delete(
 );
 
 productsRouter.get("/:id", errorHandler(getProductById));
-productsRouter.get("/products", errorHandler(getProducts));
+productsRouter.get("/", errorHandler(getProducts));
 
 export default productsRouter;

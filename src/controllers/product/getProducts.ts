@@ -11,7 +11,7 @@ export const getProducts = async (req: Request, res: Response) => {
 
   const count = await prisma.product.count();
   const products = await prisma.product.findMany({
-    skip: parseInt(req.query.skip as string, 10) || 0,
+    skip: skip,
     take: 10,
   });
 
