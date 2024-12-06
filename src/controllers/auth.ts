@@ -9,6 +9,7 @@ import { JWT_SECRET } from "../secret";
 import { NotFoundException } from "../exceptions/not-found";
 import { UnAuthorizedAccessException } from "../exceptions/unauthorized";
 import ApiResponse from "../services/apiResponse";
+import { error } from "console";
 
 export const signup = async (
   req: Request,
@@ -22,7 +23,7 @@ export const signup = async (
   let user = await prisma.user.findFirst({ where: { email } });
 
   if (user) {
-    new BadRequestException(
+    throw new BadRequestException(
       "User already exists",
       ErrorCodes.USER_ALREADY_EXISTS
     );
