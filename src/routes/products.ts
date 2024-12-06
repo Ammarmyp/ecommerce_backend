@@ -1,34 +1,30 @@
 import { Router } from "express";
-import { createProduct } from "../controllers/product/create";
 import { errorHandler } from "../services/error-handler";
 import authMiddleware from "../middlewares/auth";
 import addminMiddleware from "../middlewares/admin";
-import { updateProduct } from "../controllers/product/update";
-import { deleteProduct } from "../controllers/product/delete";
-import { getProductById } from "../controllers/product/getById";
-import { getProducts } from "../controllers/product/getProducts";
+import Property from "../controllers/product";
 
 const productsRouter: Router = Router();
 
 productsRouter.post(
   "/new",
   [authMiddleware, addminMiddleware],
-  errorHandler(createProduct)
+  errorHandler(Property.createProduct)
 );
 
 productsRouter.put(
   "/edit/:id",
   [authMiddleware, addminMiddleware],
-  errorHandler(updateProduct)
+  errorHandler(Property.updateProduct)
 );
 
 productsRouter.delete(
   "/delete/:id",
   [authMiddleware, addminMiddleware],
-  errorHandler(deleteProduct)
+  errorHandler(Property.deleteProduct)
 );
 
-productsRouter.get("/:id", errorHandler(getProductById));
-productsRouter.get("/", errorHandler(getProducts));
+productsRouter.get("/:id", errorHandler(Property.getProductById));
+productsRouter.get("/", errorHandler(Property.getProducts));
 
 export default productsRouter;

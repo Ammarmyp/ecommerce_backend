@@ -3,13 +3,11 @@ import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import prisma from "../../prisma/client";
 import { BadRequestException } from "../exceptions/bad-request";
+import { NotFoundException } from "../exceptions/not-found";
 import { ErrorCodes } from "../exceptions/root";
 import { SignupSchema } from "../schema/user";
 import { JWT_SECRET } from "../secret";
-import { NotFoundException } from "../exceptions/not-found";
-import { UnAuthorizedAccessException } from "../exceptions/unauthorized";
 import ApiResponse from "../services/apiResponse";
-import { error } from "console";
 
 export const signup = async (
   req: Request,

@@ -7,7 +7,7 @@ import prisma from "../../../prisma/client";
 import { NotFoundException } from "../../exceptions/not-found";
 import ApiResponse from "../../services/apiResponse";
 
-export const updateProduct = async (req: Request, res: Response) => {
+const updateProduct = async (req: Request, res: Response) => {
   const { error, data } = await ProductSchema.safeParseAsync(req.body);
 
   if (error) {
@@ -47,3 +47,5 @@ export const updateProduct = async (req: Request, res: Response) => {
       new ApiResponse(true, "product updated successfully", updatedProduct)
     );
 };
+
+export default updateProduct;

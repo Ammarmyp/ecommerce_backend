@@ -6,7 +6,7 @@ import prisma from "../../../prisma/client";
 import { fromError } from "zod-validation-error";
 import ApiResponse from "../../services/apiResponse";
 
-export const createProduct = async (req: Request, res: Response) => {
+const createProduct = async (req: Request, res: Response) => {
   const { success, error } = await ProductSchema.safeParseAsync(req.body);
 
   if (error) {
@@ -26,3 +26,5 @@ export const createProduct = async (req: Request, res: Response) => {
 
   res.status(201).json(new ApiResponse(true, "Product is created", product));
 };
+
+export default createProduct;
