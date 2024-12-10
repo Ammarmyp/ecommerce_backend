@@ -8,3 +8,11 @@ export const ProductSchema = z.object({
     .union([z.string(), z.array(z.string())])
     .transform((tags) => (typeof tags === "string" ? [tags] : tags)),
 });
+
+export const AddressSchema = z.object({
+  lineOne: z.string().nullable(),
+  city: z.string(),
+  region: z.string(),
+  country: z.string(),
+  userId: z.number(),
+});

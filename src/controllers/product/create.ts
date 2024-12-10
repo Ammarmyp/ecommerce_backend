@@ -13,7 +13,7 @@ const createProduct = async (req: Request, res: Response) => {
     const validationError = fromError(error).toString();
     throw new BadRequestException(
       validationError,
-      ErrorCodes.UNPROCESSABLENTITY
+      ErrorCodes.UNPROCESSABLENTITY,
     );
   }
 

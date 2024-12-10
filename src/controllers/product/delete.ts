@@ -9,12 +9,11 @@ import ApiResponse from "../../services/apiResponse";
 
 const deleteProduct = async (req: Request, res: Response) => {
   const { error } = await ProductSchema.safeParseAsync(req.body);
-
   if (error) {
     const validationError = fromError(error).toString();
     throw new BadRequestException(
       validationError,
-      ErrorCodes.UNPROCESSABLENTITY
+      ErrorCodes.UNPROCESSABLENTITY,
     );
   }
 
