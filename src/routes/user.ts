@@ -11,4 +11,10 @@ addressRouter.post(
   errorHandler(UserAddress.createAddress)
 );
 
+addressRouter.delete(
+  "/delete/:id",
+  [authMiddleware],
+  errorHandler(UserAddress.deleteAddress)
+);
+
 export default addressRouter;
