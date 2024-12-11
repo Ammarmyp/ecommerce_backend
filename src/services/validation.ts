@@ -14,5 +14,4 @@ export const AddressSchema = z.object({
   city: z.string(),
   region: z.string(),
   country: z.string(),
-  userId: z.number(),
 });
