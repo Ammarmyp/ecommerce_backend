@@ -4,7 +4,7 @@ import ApiResponse from "../../services/apiResponse";
 
 const listAddresses = async (req: Request, res: Response) => {
   const addresses = await prisma.address.findMany({
-    where: { id: req.user?.id },
+    where: { userId: req.user?.id },
   });
 
   res

@@ -17,4 +17,10 @@ addressRouter.delete(
   errorHandler(UserAddress.deleteAddress)
 );
 
+addressRouter.get(
+  "/list",
+  [authMiddleware],
+  errorHandler(UserAddress.listAddresses)
+);
+
 export default addressRouter;
