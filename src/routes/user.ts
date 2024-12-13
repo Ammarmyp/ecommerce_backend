@@ -23,4 +23,10 @@ addressRouter.get(
   errorHandler(UserAddress.listAddresses)
 );
 
+addressRouter.put(
+  "/update",
+  [authMiddleware],
+  errorHandler(UserAddress.updateAdress)
+);
+
 export default addressRouter;
