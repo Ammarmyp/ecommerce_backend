@@ -11,4 +11,10 @@ cartRouter.post(
   errorHandler(CartItem.addItemToCart)
 );
 
+cartRouter.delete(
+  "/delete/:id",
+  [authMiddleware],
+  errorHandler(CartItem.deleteFromCart)
+);
+
 export default cartRouter;
