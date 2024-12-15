@@ -18,17 +18,37 @@ const addItemToCart = async (req: Request, res: Response) => {
       ErrorCodes.PRODUCT_NOT_FOUND
     );
 
-  const cartItem = await prisma.cartItem.create({
-    data: {
-      userId: req.user?.id!,
-      productId: product.id,
-      quantity: validatedData.quantity,
+  let cartItem;
+
+  const existingCartItem = await prisma.cartItem.findFirst({
+    where: {
+      productId: validatedData.productId,
+      userId: req.user?.id,
     },
   });
 
-  res
-    .status(201)
-    .json(new ApiResponse(true, "item created in the cart", cartItem));
+  let responseMessage;
+  if (existingCartItem) {
+    cartItem = await prisma.cartItem.update({
+      where: { id: existingCartItem.id },
+      data: { quantity: existingCartItem.quantity + validatedData.quantity },
+    });
+
+    responseMessage = "quantity updated";
+  } else {
+    cartItem = await prisma.cartItem.create({
+      data: {
+        userId: req.user?.id!,
+        productId: product.id,
+        quantity: validatedData.quantity,
+      },
+    });
+
+    responseMessage = "Item created in the cart!";
+  }
+  const statusCode = existingCartItem ? 200 : 201;
+
+  res.status(statusCode).json(new ApiResponse(true, responseMessage, cartItem));
 };
 
 export default addItemToCart;
