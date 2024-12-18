@@ -17,4 +17,12 @@ cartRouter.delete(
   errorHandler(CartItem.deleteFromCart)
 );
 
+cartRouter.get("/getCart", [authMiddleware], errorHandler(CartItem.listItems));
+
+cartRouter.put(
+  "/changeQuantity/:id",
+  [authMiddleware],
+  errorHandler(CartItem.changeQuantity)
+);
+
 export default cartRouter;
